@@ -17,13 +17,19 @@
 このツールは単体の Python スクリプトです。
 
 ### 前提条件
-- **Google IDE Antigravity** または **Gemini CLI** (PowerShell)
+- **Google IDE Antigravity** または **Gemini CLI**
 - **Python 3.8 以降**: [python.org](https://www.python.org/) からインストールしてください。
 - **Gemini CLI** (または任意のAI CLIツール): パスが通っていることを確認してください。
 
-### 導入手順 (Windows)
+### 導入手順
+
+#### Windows
 1. このフォルダを任意の場所に配置します。
-2. ターミナル（PowerShell）で `.\install.ps1` を実行してセットアップします。
+2. ターミナル（PowerShell）で `.\install.ps1` を実行します。
+
+#### macOS / Linux
+1. このフォルダを任意の場所に配置します。
+2. ターミナル（Bash/Zsh）で `chmod +x install.sh && ./install.sh` を実行します。
 
 ## 🤖 スラッシュコマンド (Antigravity / Gemini CLI 共通)
 
@@ -32,14 +38,14 @@
 ### `/ralph-loop`
 現在のセッションで Ralph Loop を開始します。
 
-**構文**:
+**構文 (Windows)**:
 ```text
 /ralph-loop "<指示>" --max-iterations <回数> --completion-promise "<完了キーワード>"
 ```
 
-**例**:
-```text
-/ralph-loop "コードのバグを修正して" --max-iterations 10 --completion-promise "FIX_DONE"
+**構文 (macOS/Linux)**:
+```bash
+/ralph-loop "<指示>" <回数> "<完了キーワード>"
 ```
 
 ### `/cancel-ralph`
@@ -52,7 +58,8 @@
 Gemini CLI および Antigravity において、AI エージェントが Ralph Loop のコマンドを正しく認識し実行できるようにするため、以下の設定を推奨します。
 
 ### 設定ファイルの場所
-Windows の場合: `C:\Users\<あなたのユーザー名>\.gemini\settings.json`
+- **Windows**: `C:\Users\<ユーザー名>\.gemini\settings.json`
+- **macOS / Linux**: `~/.gemini/settings.json`
 
 ### 推奨設定内容
 `.gemini/settings.json` に以下の内容を記述（または追記）してください：
@@ -64,10 +71,13 @@ Windows の場合: `C:\Users\<あなたのユーザー名>\.gemini\settings.json
         "codingStandard": "PEP8",
         "allowedTerminalCommands": [
             "python",
+            "python3",
             "gemini",
             "/ralph-loop",
             "/cancel-ralph",
-            "powershell.exe"
+            "powershell.exe",
+            "bash",
+            "pkill"
         ]
     },
     "gemini.safety": {
@@ -85,19 +95,8 @@ Windows の場合: `C:\Users\<あなたのユーザー名>\.gemini\settings.json
 python ralph_gemini.py "<AIへの指示>" --completion-promise "<完了の合図>"
 ```
 
-### オプション引数 (手動用)
-
-- `--command`: AIを実行するコマンド名（デフォルト: `gemini`）。
-- `--completion-promise`: 必須。タスク完了とみなすキーワード。
-- `--max-iterations`: 最大試行回数（デフォルト: 50）。
-- `--interval`: 再試行までの待機秒数（デフォルト: 2）。
-
 ## 📜 ライセンス
 
 本プロジェクトは **MITライセンス** の下で公開されています。
 
 Copyright (c) 2025 **0yenAI**
-
-MITライセンスの規定により、ソフトウェアの全ての複製または重要な部分には、上記の著作権表示および本許諾表示を含める必要があります。これにより、**0yenAI** のお名前を削除して配布することはできません。
-
-詳細は [LICENSE](LICENSE) ファイルをご覧ください。
