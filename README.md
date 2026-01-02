@@ -47,6 +47,37 @@
 
 ---
 
+## ⚙️ Gemini CLI グローバル設定
+
+Gemini CLI および Antigravity において、AI エージェントが Ralph Loop のコマンドを正しく認識し実行できるようにするため、以下の設定を推奨します。
+
+### 設定ファイルの場所
+Windows の場合: `C:\Users\<あなたのユーザー名>\.gemini\settings.json`
+
+### 推奨設定内容
+`.gemini/settings.json` に以下の内容を記述（または追記）してください：
+
+```json
+{
+    "gemini.context": {
+        "preferredLanguage": "Japanese",
+        "codingStandard": "PEP8",
+        "allowedTerminalCommands": [
+            "python",
+            "gemini",
+            "/ralph-loop",
+            "/cancel-ralph",
+            "powershell.exe"
+        ]
+    },
+    "gemini.safety": {
+        "allowBackgroundExecution": true
+    }
+}
+```
+
+---
+
 ## 📖 使い方 (手動実行)
 
 基本構文:
@@ -54,26 +85,12 @@
 python ralph_gemini.py "<AIへの指示>" --completion-promise "<完了の合図>"
 ```
 
-### 具体的な使用例
-
-**シナリオ**: `app.py` にバグがあり、テストに通らない。AIに修正させ、テストが通ったら終了させたい。
-
-**手順**:
-1. AIへの指示（プロンプト）: 「app.pyのバグを直して。修正が終わってテストが通ったら『FIX_COMPLETE』と出力して」
-2. 実行するコマンド:
-
-```bash
-# Windows / Mac / Linux 共通
-python ralph_gemini.py "app.pyのバグを修正し、テストを実行してください。成功したら FIX_COMPLETE とだけ出力してください" --completion-promise "FIX_COMPLETE" --command "gemini"
-```
-
 ### オプション引数 (手動用)
 
-- `--command`: AIを実行するコマンド名（デフォルト: `gemini`）。`python my_agent.py` のように指定も可能。
+- `--command`: AIを実行するコマンド名（デフォルト: `gemini`）。
 - `--completion-promise`: 必須。タスク完了とみなすキーワード。
-- `--max-iterations`: 最大試行回数（デフォルト: 50）。無限ループ防止用。
+- `--max-iterations`: 最大試行回数（デフォルト: 50）。
 - `--interval`: 再試行までの待機秒数（デフォルト: 2）。
-- `--verbose`: 詳細ログを表示します。
 
 ## 📜 ライセンス
 
