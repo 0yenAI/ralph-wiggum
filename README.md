@@ -1,102 +1,42 @@
-# Ralph Wiggum for Gemini CLI & Google IDE Antigravity
+# Ralph Wiggum for Antigravity 🍩
+### *The Agentic Persistence Framework*
 
-**Ralph Wiggum (ラルフ・ウィガム)** は、**Google IDE Antigravity** および **Gemini CLI** のための、自律反復型開発支援ツールです。「Ralph Loop（ラルフ・ループ）」と呼ばれる手法を実装しており、AIエージェントに「特定の完了シグナル（言葉）」が出るまでタスクを粘り強く試行させ続けることができます。
+[JP] **Ralph Wiggum** は、もはや単なるスクリプトではありません。
+これは、AIエージェントが「失敗しても諦めず、自力で修正して完遂する」ための **「思考のフレームワーク（ワークフロー）」** です。
 
-> "Ralph is a Bash loop." — Geoffrey Huntley
-> （ラルフはただのBashループに過ぎない、だがそれが強力だ）
-
-## 🌟 特徴
-
-- **自動反復実行**: あなたの指示（プロンプト）に基づいて、AIコマンドを自動的に繰り返し実行します。
-- **完了検知**: AIが「完了しました」「ALL TESTS PASSED」といった特定の言葉を出力した瞬間, 自動的に停止します。
-- **粘り強いデバッグ**: 一度でうまくいかなくても、何度も再試行させることで、AI自身にエラーログを読ませ、自己修正させるワークフローを実現します。
-- **クロスプラットフォーム**: Pythonが動作する Windows, Mac, Linux すべてで動作します。
-
-## 🚀 インストール
-
-このツールは単体の Python スクリプトです。
-
-### 前提条件
-- **Google IDE Antigravity** または **Gemini CLI**
-- **Python 3.8 以降**: [python.org](https://www.python.org/) からインストールしてください。
-- **Gemini CLI** (または任意のAI CLIツール): パスが通っていることを確認してください。
-
-### 導入手順
-
-#### Windows
-1. このフォルダを任意の場所に配置します。
-2. ターミナル（PowerShell）で `.\install.ps1` を実行します。
-
-#### macOS / Linux
-1. このフォルダを任意の場所に配置します。
-2. ターミナル（Bash/Zsh）で `chmod +x install.sh && ./install.sh` を実行します。
-
-## 🤖 スラッシュコマンド (Antigravity / Gemini CLI 共通)
-
-セットアップが完了すると、Antigravity のチャット欄、および通常のターミナル（Gemini CLI）で以下のコマンドが使用可能になります。
-
-### `/ralph-loop`
-現在のセッションで Ralph Loop を開始します。
-
-**構文 (Windows)**:
-```text
-/ralph-loop "<指示>" --max-iterations <回数> --completion-promise "<完了キーワード>"
-```
-
-**構文 (macOS/Linux)**:
-```bash
-/ralph-loop "<指示>" <回数> "<完了キーワード>"
-```
-
-### `/cancel-ralph`
-現在実行中の Ralph Loop を停止します。
+[EN] **Ralph Wiggum** is no longer just a script.
+It is a **"Framework of Persistence"** that empowers AI agents to never give up, self-correct, and complete tasks autonomously.
 
 ---
 
-## ⚙️ Gemini CLI グローバル設定
+## 🤖 What's New? / 何が変わったのか？
+[JP]
+以前の「外部スクリプトをループさせる」手法（旧OS・ターミナル依存）を廃止し、**Antigravity エージェントが直接ループ構造を持つ**「エージェント・ファースト」な設計に移行しました。
+これにより、セキュリティ制限（Code 41等）に縛られることなく、エージェントが自ら考えてファイルを修復し続けることができます。
 
-Gemini CLI および Antigravity において、AI エージェントが Ralph Loop のコマンドを正しく認識し実行できるようにするため、以下の設定を推奨します。
-
-### 設定ファイルの場所
-- **Windows**: `C:\Users\<ユーザー名>\.gemini\settings.json`
-- **macOS / Linux**: `~/.gemini/settings.json`
-
-### 推奨設定内容
-`.gemini/settings.json` に以下の内容を記述（または追記）してください：
-
-```json
-{
-    "gemini.context": {
-        "preferredLanguage": "Japanese",
-        "codingStandard": "PEP8",
-        "allowedTerminalCommands": [
-            "python",
-            "python3",
-            "gemini",
-            "/ralph-loop",
-            "/cancel-ralph",
-            "powershell.exe",
-            "bash",
-            "pkill"
-        ]
-    },
-    "gemini.safety": {
-        "allowBackgroundExecution": true
-    }
-}
-```
+[EN]
+We have deprecated the old "external script loop" method. Now, the **Antigravity agent itself embodies the loop logic.**
+This removes security constraints (like Code 41) and allows the agent to think, repair, and iterate naturally within its own workflow.
 
 ---
 
-## 📖 使い方 (手動実行)
+## 🚀 How to Implement / 導入方法
+[JP] 
+このリポジトリの `.agent/workflows/ralph-loop.md` をあなたのプロジェクトにコピーしてください。それだけで、あなたのエージェントは「何があってもやり遂げる」粘り強さを手に入れます。
 
-基本構文:
-```bash
-python ralph_gemini.py "<AIへの指示>" --completion-promise "<完了の合図>"
-```
+[EN]
+Simply copy `.agent/workflows/ralph-loop.md` to your own project. Your AI agent will instantly gain the persistence to complete any task, no matter the obstacles.
 
-## 📜 ライセンス
+---
 
-本プロジェクトは **MITライセンス** の下で公開されています。
+## 📖 Commands / スラッシュコマンド
+[JP] チャット欄で `/ralph-loop` を呼び出すだけで、エージェントが粘り強いモードに入ります。
+[EN] Just call `/ralph-loop` in the chat to activate the agent's persistent mode.
 
-Copyright (c) 2025 **0yenAI**
+> `/ralph-loop "成功するまでこのバグを直し続けて"`
+
+---
+
+## 📜 Credits
+Copyright (c) 2025 **0yenAI**  
+Released under the MIT License.
